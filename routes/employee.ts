@@ -15,9 +15,9 @@ const router = express.Router();
 router.use(compression());
 
 router.post("/add", verifyToken, create);
-router.get("/", CacheService.cache("10 minutes"), verifyToken, get);
+router.get("/details", verifyToken, CacheService.cache("10 minutes"),  get);
 router.put("/update/:_id", verifyToken, update);
-router.delete("/:_id([0-9a-fA-F]{24})", verifyToken, remove);
+router.delete("/delete/:_id([0-9a-fA-F]{24})", verifyToken, remove);
 router.get(
   "/pagination/:page",
   CacheService.cache("10 minutes"),

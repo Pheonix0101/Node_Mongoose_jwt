@@ -1,0 +1,222 @@
+openapi: 3.0.0
+info:
+  title: Code Documentation API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 1.0 
+  
+
+servers:
+  - url: http://localhost:9090/
+    description:  Local server 
+  - url: https://prod.com/
+    description:  Pre Production server
+  - url: https://test.com/
+    description:  Production server
+  
+
+ 
+components:
+  securitySchemes:
+    ApiTokenss:        # arbitrary name for the security scheme
+          
+      type: http
+      scheme: bearer
+    
+#     ApiKey:        # arbitrary name for the security scheme
+#       type: apiKey
+#       in: header       # can be "header", "query" or "cookie"
+#       name: apikey
+      
+paths:
+  /details:
+    get:
+      tags:
+        - Employees List API  
+      security:
+       - ApiTokenss: []
+      #  - ApiKey: []
+      summary: Returns Employees details.
+      # parameters:
+      
+      #     required: false
+      #     description: Parameter description in CommonMark or HTML.
+      #     schema:
+      #       # type : integer
+      #       # format: int64
+      #       type: string
+      #       example: "Users String"
+      #       minimum: 1
+      responses: 
+        '200':
+          description: OK
+  
+
+  paths:
+  /add:
+    post:
+      tags:
+        - Add Employee to the database
+      summary: For Adding Employees records. 
+      description: <b> Request :- </b> <br /> <br />
+             
+
+      # parameters:
+      #   - in: query
+      #     name: month_year
+      #     schema:
+      #       #type: integer
+      #       example: 2022-10        
+      post:
+      requestBody:
+        required: true
+        content:
+          # multipart/form-data:
+           application/json:
+            schema:
+              type: object
+              properties: 
+                name:         
+                  type: String
+                  example: "abc@gmail.com"  
+                role:       
+                  type: string
+                  example: "Accountant"
+                salary:
+                  type: integer
+                  example: 34000
+                yearOfExperience:
+                  type: integer
+                  example: 2  
+                martialStatus:
+                  type: String
+                  example: "single"      
+              
+         
+      responses:
+        '200':
+          description: Employee Sucessfully Added 
+
+
+  paths:
+  /update:
+     put:
+      tags:
+        - Employees update API  
+      # security:
+      #  - ApiTokenss: []
+      #  - ApiKey: []
+      summary: update Employees details.
+      parameters:
+        - id: _id  
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            # type : integer
+            # format: int64
+            type: Integer
+            example: 64677c236e37a41f17164901
+            minimum: 1
+      responses: 
+        '200':
+          description: Record Added
+
+
+
+  paths:
+  /delete:
+    delete:
+      tags:
+        - Delete Employee API  
+      # security:
+      #  - ApiTokenss: []
+      #  - ApiKey: []
+      summary: Delete Employee by _id.
+      parameters:
+        - d: _id  
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            format: int64
+            type: integer
+            example: 64677c236e37a41f17164901
+            minimum: 1
+      responses: 
+        '200':
+          description: Record deleted         
+
+
+
+  paths:
+  /signUp:
+    post:
+      tags: 
+        - SignUp API 
+      summary:  Returns token
+      description: <b> Request :- </b> <br /> <br />
+             
+
+      # parameters:
+      #   - in: query
+      #     name: month_year
+      #     schema:
+      #       #type: integer
+      #       example: 2022-10        
+      post:
+      requestBody:
+        required: true
+        content:
+          # multipart/form-data:
+           application/json:
+            schema:
+              type: object
+              properties: 
+                emailId:         
+                  type: String
+                  example: "abc@gmail.com"  
+                password:       
+                  type: string
+                  example: "123456"
+              
+         
+      responses:
+        '200':
+          description: token genrated sucessfully. 
+
+  paths:
+  /login:
+    post:
+      tags: 
+        - login API 
+      summary:  Returns password
+      description: <b> Request :- </b> <br /> <br />
+              <b> page_no* </b>  is required <br /> 
+              <b> status* </b>  is required <br /> 
+              <b> type* </b>  is required <br /> 
+
+      # parameters:
+      #   - in: query
+      #     name: month_year
+      #     schema:
+      #       #type: integer
+      #       example: 2022-10        
+      post:
+      requestBody:
+        required: true
+        content:
+          # multipart/form-data:
+           application/json:
+            schema:
+              type: object
+              properties: 
+                emailId:         
+                  type: String
+                  example: "abc@gmail.com"  
+                password:       
+                  type: string
+                  example: "123456"
+              
+         
+      responses:
+        '200':
+          description: Login sucessfully. 
