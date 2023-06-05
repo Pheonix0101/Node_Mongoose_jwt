@@ -10,6 +10,6 @@ import {
 const router = express.Router();
 
 router.post("/signUp", signUp);
-router.post("/login", verifyToken, login);
+router.post("/login",  login);
 
 export default router;
